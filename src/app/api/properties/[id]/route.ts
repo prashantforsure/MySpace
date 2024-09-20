@@ -24,9 +24,36 @@ export async function UPDATE(req: NextRequest){
             where: {
                 id: Number(id)
             }, data: {
-                
+                title,
+                description,
+                price,
             }
         })
-
+       return NextResponse.json({
+        updateProperty
+    },{
+        status: 200
+    })
+    }catch(e){
+        return NextResponse.json({
+            message: "something went wrong"
+        },{
+            status: 409
+        })
     }
+}
+
+export async function DELETE(req: NextApiRequest){
+    const session = await getAuthSession();
+    if(!session || !session?.user?.email){
+        return NextResponse.json({
+            message: "user is unauthorized"
+        },{
+            status: 403
+        }
+    )
+    }
+    
+    const { id } = req.query;
+
 }
