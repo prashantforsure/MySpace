@@ -21,6 +21,7 @@ model User {
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
   properties Property[]
+  reviews Review[]
   bookings   Booking[]
 }
 
@@ -31,6 +32,7 @@ model Property {
   price       Float
   userId      Int
   user        User      @relation(fields: [userId], references: [id])
+  reviews Review[]
   bookings    Booking[]
 }
 
@@ -38,6 +40,16 @@ model Booking {
   id         Int      @id @default(autoincrement())
   startDate  DateTime
   endDate    DateTime
+  userId     Int
+  propertyId Int
+  user       User     @relation(fields: [userId], references: [id])
+  property   Property @relation(fields: [propertyId], references: [id])
+}
+
+model Review {
+  id         Int      @id @default(autoincrement())
+  rating     Int
+  comment    String
   userId     Int
   propertyId Int
   user       User     @relation(fields: [userId], references: [id])
