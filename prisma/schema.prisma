@@ -12,3 +12,34 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User{
+  id Int @id @default(autoincrement())
+  name String
+  email String @unique
+  password String
+  image String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  properties Property[]
+  bookings Booking[]
+
+}
+model Property{
+  id Int @id @default(autoincrement())
+  title String
+  location String
+  description String
+  price Int
+  userId Int
+   user        User     @relation(fields: [userId], references: [id])
+  bookings    Booking[]
+}
+model Booking{
+  id Int @id @default(autoincrement())
+  startDate DateTime
+  endDate DateTime
+  userId Int
+  propertyId Int
+  
+}
