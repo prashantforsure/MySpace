@@ -24,5 +24,17 @@ export async function POST(req: NextRequest){
             user: { connect: { email: session?.user?.email } },
           }
         })
+        return NextResponse.json({
+            createBooking
+        },{
+            status: 200
+        })
+    }catch(e){
+        return NextResponse.json({
+            message: "something went wrong"
+        },{
+            status: 
+        }
+    )
     }
 }
