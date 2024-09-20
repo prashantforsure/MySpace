@@ -31,6 +31,8 @@ export async function POST(req: NextRequest){
             createProperty
         })
     }catch(error){
-        message: "something went wrong"
+        return NextResponse.json({
+            message: "something went wrong"
+        })
     }
 }
