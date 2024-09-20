@@ -55,5 +55,14 @@ export async function DELETE(req: NextApiRequest){
     }
     
     const { id } = req.query;
-
+    const deleteProperty = await db.property.delete({
+        where: {
+            id: Number(id)
+        }
+    })
+    return  NextResponse.json({
+        deleteProperty
+    },{
+        status: 200
+    })
 }
