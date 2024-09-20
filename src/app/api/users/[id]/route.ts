@@ -47,6 +47,7 @@ export async function UPDATE(req: NextRequest){
             }
         )
         }
+        //@ts-ignore
         const { id } = req.query;
         const body = await req.json();
         const { name, image } = UserValidator.parse(body)
@@ -56,9 +57,20 @@ export async function UPDATE(req: NextRequest){
                 id: Number(id)
             }, 
              data: {
-                name?,
-                image?,
+                name,
+                image,
             }
+        })
+        return NextResponse.json({
+            updateUser
+        },{
+            status: 200
+        })
+    }catch(e){
+        return NextResponse.json({
+            message: "something went wrong"
+        },{
+            status: 409
         })
     }
 }
