@@ -1,9 +1,9 @@
 import { z } from 'zod'
 
-export const PropertyValidator = z.object({
-  title: z.string(),
+export const ReviewValidator = z.object({
+  rating: z.number(),
   comment: z.string(),
   propertyId: z.number(),
 })
 
-export type PropertyCreationRequest = z.infer<typeof PropertyValidator>
+export type ReviewCreationRequest = z.infer<typeof ReviewValidator>
