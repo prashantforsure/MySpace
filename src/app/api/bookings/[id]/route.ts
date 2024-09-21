@@ -18,8 +18,61 @@ export async function PUT(req: NextApiRequest){
         //@ts-ignore
         const body = await req.json();
         const { id } = req.query
-        const { startDate, endDate, propertyId } = BookingValidator.parse(body);
+        const { startDate, endDate } = BookingValidator.parse(body);
 
-        const bookingPut = await db.booking.
+        const bookingPut = await db.booking.update({
+            where: {
+                id: Number(id)
+            }, data: {
+                startDate,
+                endDate
+            }
+        })
+        return NextResponse.json({
+            bookingPut
+        },{
+            status: 200
+        })
+    }catch(e){
+        return NextResponse.json({
+            message: "something went wrong"
+        },{
+            status: 409
+        }
+    )
+    }
+}
+
+export async function DELETE(req: NextApiRequest){
+    try{
+        const session = await getAuthSession();
+        if(!session || !session?.user?.email){
+            return NextResponse.json({
+                message: "user is unauthorized"
+            },{
+                status: 403
+            }
+        )
+        }
+      
+        const { id } = req.query
+        const deleteBooking = await db.booking.delete({
+            where: {
+                id: Number(id)
+            }
+        })
+        return 
+        return NextResponse.json({
+            deleteBooking
+        },{
+            status: 200
+        })
+    }catch(e){
+        return NextResponse.json({
+            message: "something went wrong"
+        },{
+            status: 409
+        }
+    )
     }
 }
