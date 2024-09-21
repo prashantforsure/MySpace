@@ -61,7 +61,7 @@ export async function DELETE(req: NextApiRequest){
                 id: Number(id)
             }
         })
-        return 
+        
         return NextResponse.json({
             deleteBooking
         },{
