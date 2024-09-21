@@ -17,6 +17,7 @@ export async function POST(req: NextRequest){
         }
         const body = req.json()
         const { rating, comment, propertyId } = ReviewValidator.parse(body);
+        //@ts-ignore
         const createReview = await db.review.create({
             data: {
                 rating,
