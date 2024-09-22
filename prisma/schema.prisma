@@ -29,7 +29,7 @@ model Property {
   id          Int       @id @default(autoincrement())
   title       String
   description String
-  price       Float
+  price       Int
   userId      Int
   user        User      @relation(fields: [userId], references: [id])
   reviews Review[]

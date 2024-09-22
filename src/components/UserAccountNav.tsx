@@ -3,10 +3,7 @@ import { User } from 'next-auth'
 import { signOut } from 'next-auth/react'
 import { DropdownMenuContent , DropdownMenu, DropdownMenuTrigger, DropdownMenuSeparator, DropdownMenuItem } from './ui/dropdown-menu'
 import Link from 'next/link'
-
 import { UserAvatar } from './UserAvatar'
-
-
 
 interface UserAccountNavProps extends React.HTMLAttributes<HTMLDivElement> {
   user: Pick<User, 'name' | 'image' | 'email'>
@@ -17,6 +14,7 @@ export function UserAccountNav({ user }: UserAccountNavProps) {
     <DropdownMenu>
       <DropdownMenuTrigger>
         <UserAvatar
+        //@ts-ignore
           user={{ name: user.name || null, image: user.image || null }}
           className='h-8 w-8'
         />
