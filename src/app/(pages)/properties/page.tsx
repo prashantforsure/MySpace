@@ -17,6 +17,7 @@ interface property{
     title: string,
     description: string,
     price: number
+    image: string
 }
 const page = () => {
     const [ properties, setProperties ] = useState<property[]>([])
@@ -58,6 +59,7 @@ const page = () => {
                 {properties.map(property => (
                 <Link key={property.id} href={`/properties/${property.id}`}>
                     <Card  className="overflow-hidden transition-all duration-300 hover:shadow-lg">
+                    <img src={property.image || "/api/placeholder/400/300"} alt={property.title} className="w-full h-48 object-cover" />
                         <CardHeader>
                             <CardTitle>
                                 {property.title}
