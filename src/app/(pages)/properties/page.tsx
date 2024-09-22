@@ -57,7 +57,23 @@ const page = () => {
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
                 {properties.map(property => (
                 <Link key={property.id} href={`/properties/${property.id}`}>
-                    
+                    <Card  className="overflow-hidden transition-all duration-300 hover:shadow-lg">
+                        <CardHeader>
+                            <CardTitle>
+                                {property.title}
+                            </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <p className='text-sm text-gray-600 mb-2 flex items-center'>
+                                {property.description}
+                            </p>
+                        </CardContent>
+                        <CardFooter>
+                            <p className='text-sm text-green-600 mb-2 flex items-center'>
+                                {property.price} / night
+                            </p>
+                        </CardFooter>
+                    </Card>
                 </Link>
                 )
                 )}
