@@ -22,6 +22,7 @@ model User {
   updatedAt  DateTime  @updatedAt
   properties Property[]
   reviews Review[]
+  favorites Favorite[]
   bookings   Booking[]
 }
 
@@ -33,6 +34,7 @@ model Property {
   userId      Int
   user        User      @relation(fields: [userId], references: [id])
   reviews Review[]
+  favorites Favorite[]
   bookings    Booking[]
 }
 
@@ -50,6 +52,14 @@ model Review {
   id         Int      @id @default(autoincrement())
   rating     Int
   comment    String
+  userId     Int
+  propertyId Int
+  user       User     @relation(fields: [userId], references: [id])
+  property   Property @relation(fields: [propertyId], references: [id])
+}
+
+model Favorite {
+  id         Int      @id @default(autoincrement())
   userId     Int
   propertyId Int
   user       User     @relation(fields: [userId], references: [id])

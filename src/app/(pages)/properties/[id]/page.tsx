@@ -17,6 +17,7 @@ import { CalendarIcon, DollarSign, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface reviewType {
+  id: number
   rating:     number
   comment: string
   userId: number
@@ -34,9 +35,9 @@ const page = () => {
     const router = useRouter();
     const { id } = router.query;
     const [property, setProperty] = useState<propertyType | null>(null);
-    const [startDate, setStartDate] = useState<>(null);
-    const [endDate, setEndDate] = useState(null);
-    const [reviews, setReviews] = useState<reviewType | null>()
+    const [startDate, setStartDate] = useState<Date | null>(null);
+    const [endDate, setEndDate] = useState<Date | null>(null);
+    const [reviews, setReviews] = useState<reviewType[]>([])
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -46,6 +47,7 @@ const page = () => {
      })
      axios.get('/api/reviews?propertyId=${id}').then((res) => {
      setReviews(res.data)
+     setLoading(false)
      })
     }
     }, [id])
@@ -120,6 +122,7 @@ const page = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
                   <Calendar
                     mode="single"
+                    //@ts-ignore
                     selected={startDate}
                     onSelect={setStartDate}
                     className="rounded-md border"
@@ -129,6 +132,7 @@ const page = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-1">End Date</label>
                   <Calendar
                     mode="single"
+                    //@ts-ignore
                     selected={endDate}
                     onSelect={setEndDate}
                     className="rounded-md border"
