@@ -26,6 +26,11 @@ const favorite = await db.favorite.create({
     return NextResponse.json(favorite);
 
 }catch(error){
-    
+    return NextResponse.json({
+        message: "error"
+    }, {
+        status: 509
+    }
+)
 }
 }
