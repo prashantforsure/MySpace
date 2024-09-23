@@ -7,6 +7,7 @@ import { format } from 'date-fns'
 import { CalendarDays, Home, DollarSign, Loader2 } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { getAuthSession } from '@/lib/auth'
 
 
 interface Booking {
@@ -20,8 +21,12 @@ interface Booking {
   totalPrice: number
 }
 
-export default function Page() {
-  const { data: session } = useSession()
+export default async function Page() {
+    const session = await getAuthSession();
+    if(!session){
+        return alert("user not logged in")
+    }
+    
   const [bookings, setBookings] = useState<Booking[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
