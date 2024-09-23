@@ -46,9 +46,17 @@ const HeroSection = () => {
 
     }
 
-    const handleKeyPress =  
+    const handleKeyPress =  (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+          handleSearch();
+        }
+      };
   return (
-    <div>HeroSection</div>
+    <>
+    <div className=''>
+        
+    </div>
+    </>
   )
 }
 
